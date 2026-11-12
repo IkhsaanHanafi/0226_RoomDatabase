@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">perte9</string>
-</resources>
+    <string name="app_name">Data Siswa</string>
+    <string name="entry_siswa">Tambah Siswa</string>
+    <string name="deskripsi_no_item">Tidak ada data Siswa. Tap + untuk menambah data</string>
