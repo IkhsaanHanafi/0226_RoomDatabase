@@ -33,6 +33,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.perte9.R
+import com.example.perte9.room.Siswa
+import com.example.perte9.uicontroller.DestinasiNavigasi
+import com.example.perte9.uicontroller.SiswaTopAppBar
+import com.example.perte9.viewmodel.HomeViewModel
+import com.example.perte9.viewmodel.PenyediaViewModel
 
 object DestinasiHome : DestinasiNavigasi {
     override val route = "home"

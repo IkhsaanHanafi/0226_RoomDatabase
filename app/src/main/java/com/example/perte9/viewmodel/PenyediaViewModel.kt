@@ -1,16 +1,15 @@
 package com.example.perte9.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.aplikasisiswa.ui.view.entry.EntryViewModel
-import com.example.aplikasisiswa.ui.view.home.HomeViewModel
+import com.example.perte9.AplikasiSiswa
+import com.example.perte9.viewmodel.HomeViewModel
+import com.example.perte9.viewmodel.EntryViewModel
 
 object PenyediaViewModel {
     val Factory = viewModelFactory {
-
         initializer {
             HomeViewModel(aplikasiSiswa().container.repositoriSiswa)
         }

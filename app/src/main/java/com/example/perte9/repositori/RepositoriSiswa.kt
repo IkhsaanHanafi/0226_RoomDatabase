@@ -1,5 +1,7 @@
 package com.example.perte9.repositori
 
+import com.example.perte9.room.Siswa
+import com.example.perte9.room.SiswaDao
 import kotlinx.coroutines.flow.Flow
 
 interface RepositoriSiswa {

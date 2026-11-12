@@ -1,15 +1,13 @@
 package com.example.perte9.viewmodel
 
-
-
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.example.perte9.data.RepositoriSiswa
-import com.example.perte9.data.Siswa
+import com.example.perte9.repositori.RepositoriSiswa
+import com.example.perte9.room.Siswa
 
-class EntryViewModel(private val repositoriSiswa: RepositoriSiswa) : ViewModel() {
+class EntryViewModel(private val repositoriSiswa: RepositoriSiswa): ViewModel() {
 
     /**
      * Berisi status Siswa saat ini
@@ -52,7 +50,7 @@ data class DetailSiswa(
     val telpon: String = "",
 )
 
-/* Fungsi untuk mengkonversi data input ke data dalam tabel sesuai jenis datanya*/
+/* Fungsi untuk mengkonversi data input ke data dalam tabel sesuai jenis datanya */
 fun DetailSiswa.toSiswa(): Siswa = Siswa(
     id = id,
     nama = nama,
