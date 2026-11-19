@@ -1,55 +1,30 @@
 package com.example.perte9.uicontroller
 
-
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.perte9.R
-import com.example.perte9.view.DestinasiEntry
-import com.example.perte9.view.DestinasiHome
+import androidx.navigation.navArgument
+import com.example.perte9.view.DetailSiswaScreen
+import com.example.perte9.view.EditSiswaScreen
 import com.example.perte9.view.EntrySiswaScreen
 import com.example.perte9.view.HomeScreen
+import com.example.perte9.view.route.DestinasiDetailSiswa
+import com.example.perte9.view.route.DestinasiEditSiswa
+import com.example.perte9.view.route.DestinasiEntry
+import com.example.perte9.view.route.DestinasiHome
 
 @Composable
-fun SiswaApp(navController: NavHostController = rememberNavController()){
-    HostNavigasi(navController = navController)
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun SiswaTopAppBar(
-    title: String,
-    canNavigateBack: Boolean,
+fun SiswaApp(
     modifier: Modifier = Modifier,
-    scrollBehavior: TopAppBarScrollBehavior? = null,
-    navigateUp: () -> Unit = {}
+    navController: NavHostController = rememberNavController()
 ) {
-    CenterAlignedTopAppBar(
-        title = { Text(title) },
-        modifier = modifier,
-        scrollBehavior = scrollBehavior,
-        navigationIcon = {
-            if (canNavigateBack) {
-                IconButton(onClick = navigateUp) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = stringResource(R.string.back)
-                    )
-                }
-            }
-        }
+    HostNavigasi(
+        navController = navController,
+        modifier = modifier
     )
 }
 
@@ -57,7 +32,7 @@ fun SiswaTopAppBar(
 fun HostNavigasi(
     navController: NavHostController,
     modifier: Modifier = Modifier
-){
+) {
     NavHost(
         navController = navController,
         startDestination = DestinasiHome.route,
@@ -66,10 +41,35 @@ fun HostNavigasi(
         composable(DestinasiHome.route) {
             HomeScreen(
                 navigateToItemEntry = { navController.navigate(DestinasiEntry.route) },
+                onSiswaClick = {
+                    navController.navigate("${DestinasiDetailSiswa.route}/$it")
+                }
             )
         }
         composable(DestinasiEntry.route) {
             EntrySiswaScreen(navigateBack = { navController.popBackStack() })
+        }
+        composable(
+            route = DestinasiDetailSiswa.routeWithArgs,
+            arguments = listOf(navArgument(DestinasiDetailSiswa.siswaId) {
+                type = NavType.IntType
+            })
+        ) {
+            DetailSiswaScreen(
+                navigateToEditItem = { navController.navigate("${DestinasiEditSiswa.route}/$it") },
+                navigateBack = { navController.navigateUp() }
+            )
+        }
+        composable(
+            route = DestinasiEditSiswa.routeWithArgs,
+            arguments = listOf(navArgument(DestinasiEditSiswa.itemId) {
+                type = NavType.IntType
+            })
+        ) {
+            EditSiswaScreen(
+                navigateBack = { navController.popBackStack() },
+                onNavigateUp = { navController.navigateUp() }
+            )
         }
     }
 }

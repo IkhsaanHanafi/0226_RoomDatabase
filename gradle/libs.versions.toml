@@ -9,6 +9,7 @@ activityCompose = "1.12.0"
 composeBom = "2025.11.01"
 room = "2.8.4"
 kspver = "2.3.13"
+foundation = "1.12.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -33,6 +34,7 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version = "2.10.0" }
 lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version = "2.10.0" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version = "2.9.6" }
+androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "foundation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
