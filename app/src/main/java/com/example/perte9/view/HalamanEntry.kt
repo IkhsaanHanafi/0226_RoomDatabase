@@ -1,4 +1,5 @@
 package com.example.perte9.view
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,36 +24,30 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.perte9.R
-import com.example.perte9.uicontroller.DestinasiNavigasi
-import com.example.perte9.uicontroller.SiswaTopAppBar
+import com.example.perte9.view.route.DestinasiEntry
 import com.example.perte9.viewmodel.DetailSiswa
 import com.example.perte9.viewmodel.EntryViewModel
 import com.example.perte9.viewmodel.PenyediaViewModel
 import com.example.perte9.viewmodel.UIStateSiswa
 import kotlinx.coroutines.launch
 
-object DestinasiEntry: DestinasiNavigasi {
-    override val route = "item_entry"
-    override val titleRes = R.string.entry_siswa
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EntrySiswaScreen(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: EntryViewModel = viewModel(factory = PenyediaViewModel.Factory)
+    viewModel: EntryViewModel = viewModel<EntryViewModel>(factory = PenyediaViewModel.Factory)
 ) {
     val coroutineScope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
-    Scaffold (
+    Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             SiswaTopAppBar(
                 title = stringResource(DestinasiEntry.titleRes),
                 canNavigateBack = true,
-                scrollBehavior = scrollBehavior,
-                navigateUp = navigateBack
+                navigateUp = navigateBack,
+                scrollBehavior = scrollBehavior
             )
         }) { innerPadding ->
         EntrySiswaBody(
@@ -99,17 +94,18 @@ fun EntrySiswaBody(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormInputSiswa(
     detailSiswa: DetailSiswa,
     modifier: Modifier = Modifier,
     onValueChange: (DetailSiswa) -> Unit = {},
     enabled: Boolean = true
-){
+) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
-    ){
+    ) {
         OutlinedTextField(
             value = detailSiswa.nama,
             onValueChange = { onValueChange(detailSiswa.copy(nama = it)) },
@@ -144,7 +140,7 @@ fun FormInputSiswa(
         }
         HorizontalDivider(
             thickness = dimensionResource(R.dimen.padding_small),
-            modifier = Modifier.padding(bottom = dimensionResource(R.dimen.padding_medium))
+            modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_medium))
         )
     }
 }
